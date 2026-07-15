@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>遺產繼承辦理指南 - 專業服務顧問</title>
+    <style>
+        :root {
+            --primary-color: #0F172A; /* 高質感深藍 */
+            --accent-color: #B4905A;  /* 點綴金 */
+            --bg-color: #F8FAFC;
+            --white: #FFFFFF;
+            --text-main: #334155;
+            --text-light: #64748B;
+            --border-color: #E2E8F0;
+            --highlight-bg: #FDFBF7;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, 'LiHei Pro', 'Microsoft JhengHei', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* 頂部介紹區塊 */
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 3.5rem 1rem;
+            text-align: center;
+            border-bottom: 4px solid var(--accent-color);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+            color: var(--white);
+        }
+
+        .consultant-badge {
+            display: inline-block;
+            margin-top: 1.2rem;
+            padding: 0.6rem 2rem;
+            background: rgba(180, 144, 90, 0.1);
+            border: 1px solid var(--accent-color);
+            border-radius: 50px;
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+
+        /* 主要內容區 */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-left: 5px solid var(--accent-color);
+            padding-left: 12px;
+            margin-top: 3rem;
+            font-size: 1.5rem;
+        }
+
+        /* 三大時限卡片區塊 */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 1.8rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border-top: 4px solid var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-top: 4px solid var(--accent-color);
+        }
+
+        .card h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card .time-limit {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* 計算工具區塊 */
+        .calculator-section {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .input-group {
+            margin: 1.5rem 0;
+        }
+
+        input[type="date"] {
+            padding: 0.8rem 1rem;
+            font-size: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            margin-right: 10px;
+            color: var(--text-main);
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: var(--accent-color);
+            border: 1px solid var(--primary-color);
+            padding: 0.8rem 1.8rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--accent-color);
+            color: var(--white);
+            border-color: var(--accent-color);
+        }
+
+        .results {
+            display: none;
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background-color: var(--highlight-bg);
+            border-radius: 8px;
+            text-align: left;
+            border: 1px solid #F0E6D2;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--border-color);
+            font-size: 1.05rem;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-item span.date-val {
+            font-weight: bold;
+            color: #B91C1C;
+        }
+
+        /* 互動清單區塊 */
+        .progress-wrapper {
+            margin-bottom: 1.5rem;
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .progress-text {
+            text-align: right;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 12px;
+            background-color: var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background-color: var(--accent-color);
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist > li {
+            background: var(--white);
+            margin-bottom: 1rem;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: flex-start;
+            border-left: 4px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .checklist > li.completed {
+            border-left: 4px solid var(--accent-color);
+            background-color: var(--highlight-bg);
+        }
+
+        .checklist > li.completed .step-title,
+        .checklist > li.completed .step-desc {
+            color: var(--text-light);
+            text-decoration: line-through;
+        }
+
+        input[type="checkbox"] {
+            margin-top: 5px;
+            margin-right: 15px;
+            width: 24px;
+            height: 24px;
+            accent-color: var(--primary-color);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            width: 100%;
+        }
+
+        label {
+            cursor: pointer;
+            display: block;
+        }
+
+        .step-num {
+            font-weight: bold;
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .step-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            transition: color 0.3s;
+        }
+
+        .step-desc {
+            color: var(--text-main);
+            font-size: 0.95rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        /* 收合詳細資訊樣式 */
+        details {
+            background-color: var(--bg-color);
+            border-radius: 8px;
+            padding: 0;
+            overflow: hidden;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        summary {
+            font-weight: bold;
+            color: var(--primary-color);
+            cursor: pointer;
+            padding: 12px 15px;
+            outline: none;
+            display: flex;
+            align-items: center;
+            user-select: none;
+        }
+
+        summary::before {
+            content: "▲";
+            display: inline-block;
+            margin-right: 8px;
+            font-size: 0.8rem;
+            transform: rotate(180deg);
+            transition: transform 0.3s;
+            color: var(--primary-color);
+        }
+
+        details[open] summary::before {
+            transform: rotate(0deg);
+        }
+
+        details[open] summary {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .details-body {
+            padding: 15px;
+            font-size: 0.95rem;
+            background-color: var(--white);
+        }
+
+        .details-body ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .details-body li {
+            margin-bottom: 5px;
+        }
+
+        /* 表格樣式 */
+        table.info-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        table.info-table th, table.info-table td {
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            text-align: left;
+            vertical-align: top;
+        }
+
+        table.info-table th {
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+            width: 120px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        /* 底部免責聲明 */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            text-align: center;
+            padding: 3rem 1.5rem;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            color: #94A3B8;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        
+        @media (max-width: 600px) {
+            table.info-table th, table.info-table td {
+                display: block;
+                width: 100%;
+            }
+            table.info-table th {
+                border-bottom: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>遺產繼承辦理指南</h1>
+        <div class="consultant-badge">專業服務顧問：新光人壽 張筱妮</div>
+    </header>
+
+    <div class="container">
+        
+        <h2>三大關鍵時限</h2>
+        <div class="cards-grid">
+            <div class="card">
+                <h3>拋棄繼承 / 陳報遺產清冊</h3>
+                <div class="time-limit">知悉起 3 個月內</div>
+                <p>若逝者生前留有債務，且可能大於資產，應儘速向法院辦理「拋棄繼承」或聲請「陳報遺產清冊(限定繼承)」。</p>
+                <details>
+                    <summary>收合說明</summary>
+                    <div class="details-body">
+                        <p><strong>辦理機關：</strong>被繼承人住所地之地方法院</p>
+                        <p><strong>核心注意事項：</strong></p>
+                        <ul>
+                            <li>需通知因其拋棄而成為繼承人者（如次順位繼承人）。</li>
+                            <li>目前法律雖已改為「法定限定繼承」，但主動申報遺產清冊能更安全且有效地釐清債務關係。</li>
+                        </ul>
+                    </div>
+                </details>
+            </div>
+
+            <div class="card">
+                <h3>申報遺產稅</h3>
+                <div class="time-limit">死亡日起 6 個月內</div>
+                <p>不論遺產總額多寡（即使未達免稅額），皆須向國稅局申報遺產稅。如有正當理由，可申請延長 3 個月。</p>
+                <details>
+                    <summary>收合說明</summary>
+                    <div class="details-body">
+                        <p><strong>辦理機關：</strong>被繼承人戶籍所在地國稅局</p>
+                        <p><strong>核心注意事項：</strong></p>
+                        <ul>
+                            <li>逾期申報除了會被補稅外，還可能面臨 1 倍至 2 倍的罰鍰。</li>
+                            <li>若有多位繼承人，可由其中一人代表全體申報。</li>
+                        </ul>
+                    </div>
+                </details>
+            </div>
+
+            <div class="card">
+                <h3>不動產繼承登記</h3>
+                <div class="time-limit">死亡日起 6 個月內</div>
+                <p>若遺產中包含土地或房屋，須在 6 個月內完成過戶。逾期辦理將面臨罰鍰，最嚴重可能會被公開標售。</p>
+                <details>
+                    <summary>收合說明</summary>
+                    <div class="details-body">
+                        <p><strong>辦理機關：</strong>不動產所在地的地政事務所</p>
+                        <p><strong>核心注意事項：</strong></p>
+                        <ul>
+                            <li>逾期登記每逾 1 個月，處登記費額 1 倍之罰鍰，最高可罰至 20 倍。</li>
+                            <li>若無法達成全體協議，可由其中一人先申請登記為「公同共有」，避免受罰。</li>
+                        </ul>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <h2>關鍵時限自動試算</h2>
+        <div class="calculator-section">
+            <p>請輸入被繼承人死亡日期，系統將為您自動推算各項辦理截止日：</p>
+            <div class="input-group">
+                <input type="date" id="death-date" required>
+                <button onclick="calculateDates()">計算截止日</button>
+            </div>
+            <div class="results" id="result-box">
+                <div class="result-item">
+                    <span>拋棄繼承期限 (3個月)</span>
+                    <span class="date-val" id="res-3m">-</span>
+                </div>
+                <div class="result-item">
+                    <span>申報遺產稅期限 (6個月)</span>
+                    <span class="date-val" id="res-6m-tax">-</span>
+                </div>
+                <div class="result-item">
+                    <span>不動產登記期限 (6個月)</span>
+                    <span class="date-val" id="res-6m-estate">-</span>
+                </div>
+            </div>
+        </div>
+
+        <h2>八大辦理步驟互動清單</h2>
+        <div class="progress-wrapper">
+            <div class="progress-text" id="progress-text">完成度：0%</div>
+            <div class="progress-bar-container">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+        </div>
+
+        <ul class="checklist">
+            <li>
+                <input type="checkbox" id="step1" class="task-check">
+                <div class="step-content">
+                    <label for="step1">
+                        <div class="step-num">STEP 01</div>
+                        <div class="step-title">申請死亡證明與除戶謄本</div>
+                    </label>
+                    <p class="step-desc">持死亡證明書向戶政事務所申辦死亡登記，並取得「除戶謄本」與繼承人的「現戶戶籍謄本」。</p>
+                    <details>
+                        <summary>收合詳細資訊</summary>
+                        <div class="details-body">
+                            <table class="info-table">
+                                <tr>
+                                    <th>辦理機關</th>
+                                    <td>全國任一戶政事務所</td>
+                                </tr>
+                                <tr>
+                                    <th>應備文件</th>
+                                    <td>醫院核發的死亡證明書正本、死者身分證與戶口名簿、申請人身分證與印章。</td>
+                                </tr>
+                                <tr>
+                                    <th>貼心提醒</th>
+                                    <td>建議一次申請 5-10 份除戶謄本，後續銀行提款、過戶登記皆會大量用到。</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </details>
+                </div>
+            </li>
+
+            <li>
+                <input type="checkbox" id="step2" class="task-check">
+                <div class="step-content">
+                    <label for="step2">
+                        <div class="step-num">STEP 02</div>
+                        <div class="step-title">查調財產、所得及贈與資料</div>
+                    </label>
+                    <p class="step-desc">至國稅局或透過線上系統，申請被繼承人的「財產清單」、「最近年度所得資料」並查詢金融遺產。</p>
+                    <details>
+                        <summary>收合詳細資訊</summary>
+                        <div class="details-body">
+                            <table class="info-table">
+                                <tr>
+                                    <th>辦理機關</th>
+                                    <td>各地區國稅局或分局、稽徵所</td>
+                                </tr>
+                                <tr>
+                                    <th>應備文件</th>
+                                    <td>申請人身分證正本及印章、被繼承人除戶戶籍謄本、與被繼承人之關係證明。</td>
+                                </tr>
+                                <tr>
+                                    <th>重要服務</th>
+                                    <td>推薦申請「一站式查詢金融遺產」，可一次查出死者名下的存款、股票、保單與基金。</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </details>
+                </div>
+            </li>
+
+            <li>
+                <input type="checkbox" id="step3" class="task-check">
+                <div class="step-content">
+                    <label for="step3">
+                        <div class="step-num">STEP 03</div>
+                        <div class="step-title">確認遺囑與全體合法繼承人</div>
+                    </label>
+                    <p class="step-desc">核對被繼承人生前是否留有合法遺囑。依民法法定順位確認全體繼承人並繪製「繼承系統表」。</p>
+                    <details>
+                        <summary>收合詳細資訊</summary>
+                        <div class="details-body">
+                            <table class="info-table">
+                                <tr>
+                                    <th>辦理機關</th>
+                                    <td>無（繼承人自行核對或委託專業人員辦理）</td>
+                                </tr>
+                                <tr>
+                                    <th>繼承順位</th>
+                                    <td>配偶為當然繼承人。第一順位：子女；第二順位：父母；第三順位：兄弟姊妹；第四順位：祖父母。</td>
+                                </tr>
+                                <tr>
+                                    <th>特留分限制</th>
+                                    <td>即便立有遺囑，其繼承分配方式仍不得違反民法關於「特留分」的最低保障額度。</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </details>
+                </div>
+            </li>
+
+            <li>
+                <input type="checkbox" id="step4" class="task-check">
+                <div class="step-content">
+                    <label for="step4">
+                        <div class="step-num">STEP 04</div>
+                        <div class="step-title">評估是否拋棄繼承（3 個月內）</div>
+                    </label>
+                    <p class="step-desc">根據步驟 2 查得的資產與負債，若確定負債可能大於財產，務必於 3 個月內具狀向法院提出拋棄繼承聲請。</p>
+                    <details>
+                        <summary>收合詳細資訊</summary>
+                        <div class="details-body">
+                            <table class="info-table">
+                                <tr>
+                                    <th>辦理機關</th>
+                                    <td>被繼承人戶籍住所在地之地方法院</td>
+                                </tr>
+                                <tr>
+                                    <th>應備文件</th>
+                                    <td>拋棄繼承聲請書、除戶謄本、拋棄人戶籍謄本、繼承系統表、已通知次順位繼承人證明。</td>
+                                </tr>
+                                <tr>
+                                    <th>限定繼承</th>
+                                    <td>若不拋棄，亦會自動適用「限定繼承」以財產為限償還債務，但辦理拋棄最乾淨無爭議。</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </details>
+                </div>
+            </li>
+
+            <li>
+                <input type="checkbox" id="step5" class="task-check">
+                <div class="step-content">
+                    <label for="step5">
+                        <div class="step-num">STEP 05</div>
+                        <div class="step-title">申報遺產稅（6 個月內）</div>
+                    </label>
+                    <p class="step-desc">無論資產是否達課稅標準，均應於時限內檢附繼承證明與財產憑證，向國稅局進行遺產稅申報。</p>
+                    <details>
+                        <summary>收合詳細資訊</summary>
+                        <div class="details-body">
+                            <table class="info-table">
+                                <tr>
+                                    <th>辦理機關</th>
+                                    <td>被繼承人戶籍所在地之國稅局（亦可使用自然人憑證進行線上網路申報）</td>
+                                </tr>
+                                <tr>
+                                    <th>應備文件</th>
+                                    <td>申報書、除戶謄本、繼承人戶籍資料、繼承系統表、財產證明（如權狀、存摺影本）。</td>
+                                </tr>
+                                <tr>
+                                    <th>申請展延</th>
+                                    <td>若尋找財產不易，務必在6個月到期前，向國稅局具狀申請展延，最長可展延3個月。</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </details>
+                </div>
+            </li>
+
+            <li>
+                <input type="checkbox" id="step6" class="task-check">
+                <div class="step-content">
+                    <label for="step6">
+                        <div class="step-num">STEP 06</div>
+                        <div class="step-title">取得繳清證明或免稅證明</div>
+                    </label>
+                    <p class="step-desc">申報核定後，繳納對應遺產稅。確認完成（或核定免稅）後，向國稅局領取繳清或免稅證明書。</p>
+                    <details>
+                        <summary>收合詳細資訊</summary>
+                        <div class="details-body">
+                            <table class="info-table">
+                                <tr>
+                                    <th>辦理機關</th>
+                                    <td>各地區國稅局</td>
+                                </tr>
+                                <tr>
+                                    <th>核心憑證</th>
+                                    <td>遺產稅繳清證明書、免稅證明書、或不計入遺產總額證明書。</td>
+                                </tr>
+                                <tr>
+                                    <th>備註</th>
+                                    <td>這張核發證書是後續地政產權辦理以及金融資產取回的「唯一憑證」，請妥善保管。</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </details>
+                </div>
+            </li>
+
+            <li>
+                <input type="checkbox" id="step7" class="task-check">
+                <div class="step-content">
+                    <label for="step7">
+                        <div class="step-num">STEP 07</div>
+                        <div class="step-title">查欠地方稅</div>
+                    </label>
+                    <p class="step-desc">進行土地與房屋過戶之前，須持遺產稅證明書至地方稅捐稽徵所，確認該不動產無欠繳房屋稅及地價稅。</p>
+                    <details>
+                        <summary>收合詳細資訊</summary>
+                        <div class="details-body">
+                            <table class="info-table">
+                                <tr>
+                                    <th>辦理機關</th>
+                                    <td>不動產所在地之地方稅務局（稅捐稽徵處）</td>
+                                </tr>
+                                <tr>
+                                    <th>應備文件</th>
+                                    <td>國稅局核發之「遺產稅繳清證明書」或「免稅證明書」。</td>
+                                </tr>
+                                <tr>
+                                    <th>目的</th>
+                                    <td>地政事務所依法規定，必須確認並無欠繳地方稅（地價稅與房屋稅），方能准予產權移轉。</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </details>
+                </div>
+            </li>
+
+            <li>
+                <input type="checkbox" id="step8" class="task-check">
+                <div class="step-content">
+                    <label for="step8">
+                        <div class="step-num">STEP 08</div>
+                        <div class="step-title">辦理產權移轉與銀行結清</div>
+                    </label>
+                    <p class="step-desc">持備妥之所有文件與稅單證明，至地政事務所辦理不動產過戶，並至各銀行辦理存款結清手續。</p>
+                    <details>
+                        <summary>收合詳細資訊</summary>
+                        <div class="details-body">
+                            <table class="info-table">
+                                <tr>
+                                    <th>辦理機關</th>
+                                    <td>地政事務所（不動產）、各金融機構（存款/股票）</td>
+                                </tr>
+                                <tr>
+                                    <th>應備文件</th>
+                                    <td>遺產稅繳清/免稅證明書、繼承系統表、除戶謄本、全體繼承人印鑑證明等。</td>
+                                </tr>
+                                <tr>
+                                    <th>目的</th>
+                                    <td>完成資產的最終分配與所有權移轉手續，保障繼承人權益。</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </details>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+
+    <footer>
+        <p>【法律免責聲明】<br>
+        本網頁提供之時效試算與辦理流程指南僅供參考。實際辦理規定、應備文件與精確時效，應以各主管機關（國稅局、地政事務所、法院等）之最新法令規定為準。如遇複雜繼承案件或衍生法律爭議，建議尋求專業律師、會計師或地政士（代書）協助。本系統及顧問不對因使用本指南而產生之任何直接或間接損失負法律責任。</p>
+    </footer>
+
+    <script>
+        // 關鍵時限計算邏輯
+        function addMonths(date, months) {
+            var d = date.getDate();
+            date.setMonth(date.getMonth() + +months);
+            // 處理跨月天數問題
+            if (date.getDate() != d) {
+              date.setDate(0);
+            }
+            return date;
+        }
+
+        function formatDate(date) {
+            const yyyy = date.getFullYear();
+            const mm = String(date.getMonth() + 1).padStart(2, '0');
+            const dd = String(date.getDate()).padStart(2, '0');
+            return `${yyyy}年${mm}月${dd}日`;
+        }
+
+        function calculateDates() {
+            const dateInput = document.getElementById('death-date').value;
+            if (!dateInput) {
+                alert("請先選擇被繼承人死亡日期");
+                return;
+            }
+
+            const baseDate1 = new Date(dateInput);
+            const baseDate2 = new Date(dateInput);
+
+            const date3m = addMonths(baseDate1, 3);
+            const date6m = addMonths(baseDate2, 6);
+
+            document.getElementById('res-3m').innerText = formatDate(date3m);
+            document.getElementById('res-6m-tax').innerText = formatDate(date6m);
+            document.getElementById('res-6m-estate').innerText = formatDate(date6m);
+            
+            document.getElementById('result-box').style.display = 'block';
+        }
+
+        // 互動清單進度條邏輯
+        const checkboxes = document.querySelectorAll('.task-check');
+        const progressFill = document.getElementById('progress-fill');
+        const progressText = document.getElementById('progress-text');
+
+        function updateProgress() {
+            const total = checkboxes.length;
+            let checkedCount = 0;
+
+            checkboxes.forEach(box => {
+                const li = box.closest('li');
+                if (box.checked) {
+                    checkedCount++;
+                    li.classList.add('completed');
+                } else {
+                    li.classList.remove('completed');
+                }
+            });
+
+            const percentage = Math.round((checkedCount / total) * 100);
+            progressFill.style.width = percentage + '%';
+            progressText.innerText = '完成度：' + percentage + '%';
+        }
+
+        checkboxes.forEach(box => {
+            box.addEventListener('change', updateProgress);
+        });
+    </script>
+</body>
+</html>
